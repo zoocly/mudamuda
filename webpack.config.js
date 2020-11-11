@@ -8,10 +8,21 @@ module.exports = {
   entry:'./src/index.js',
   output:{
     path:path.resolve(__dirname,'dist'),
-    filename:'bundle.js'
+    filename:'bundle.js',
+    // publicPath: "dist/"
   },
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
+      },
       {
         test: /\.css$/,
         use: [ 'style-loader', 'css-loader']
@@ -26,15 +37,28 @@ module.exports = {
           loader: "less-loader" // compiles Less to CSS
         }]
       },
+      // {
+      //   test: /\.(png|jpg|gif)$/,
+      //   use: [
+      //     {
+      //       loader: 'file-loader',
+      //       options: {}
+      //     },
+      //   ]
+      // },
+        //todo url-loader 和 file-loader 不能同时用？
       {
         test: /\.(png|jpg|gif)$/,
         use: [
           {
-            loader: 'file-loader',
-            options: {}
+            loader: 'url-loader',
+            options: {
+              limit: 8192
+            }
           }
         ]
-      }
+      },
+
     ]
   }
 }
