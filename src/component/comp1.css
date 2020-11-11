@@ -1,0 +1,68 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.screen {
+  position: relative;
+  overflow: hidden;
+}
+.screen > ul {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+.screen > ul > li {
+  height: 100%;
+  overflow: hidden;
+  float: left;
+}
+li > img{
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.screen > ol {
+  position: absolute;
+  bottom: 2px;
+  line-height: 20px;
+  width: 100%;
+  text-align: center;
+}
+.screen > ol > li{
+  width: 10px;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid black;
+  padding: 2px;
+  margin: 2px;
+}
+
+#arrow {
+  display: none;
+}
+#arrow span{
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: calc(50% - 10px);
+  background: #000;
+  cursor: pointer;
+  line-height: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-family: '黑体';
+  font-size: 20px;
+  color: #fff;
+  /*透明度：这个是指全透明*/
+  opacity: 0.3;
+  border: 1px solid #fff;
+}
+#arrow #right {
+  right: 5px;
+}
+.current {
+  background: rebeccapurple;
+}

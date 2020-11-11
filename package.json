@@ -1,0 +1,24 @@
+{
+  "name": "htmltest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.5.1"
+  },
+  "description": "",
+  "devDependencies": {
+    "css-loader": "^5.0.1",
+    "jquery": "^3.5.1",
+    "less": "^3.12.2",
+    "less-loader": "^7.0.2",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0"
+  }
+}

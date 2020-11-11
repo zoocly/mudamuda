@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <title>JS/Jquery 表单方式提交总结 - Zero_追梦 - 博客园</title>
+</head>
+<body class="has-navbar">
+<div id="bannerbar" class="formobile">
+    <a href="https://brands.cnblogs.com/aws/free?source=mobile-banner" target="_blank" onclick="ga('send', 'event', 'Link', 'click', 'aws-mobile-bannerbar')"><img src="https://img2020.cnblogs.com/blog/35695/202011/35695-20201104135303888-13496776.png" alt=""/></a>
+</div>
+<!--done-->
+<div id="home">
+    <div id="main">
+        <div id="mainContent">
+            <div class="forFlow">
+                <div id="post_detail">
+                    <!--done-->
+                    <div id="topics">
+                        <div class="post">
+                            <h1 class = "postTitle">
+
+                                <a id="cb_post_title_url" class="postTitle2 vertical-middle" href="https://www.cnblogs.com/zero-zm/p/11622779.html">
+                                    <span>JS/Jquery 表单方式提交总结</span>
+                                </a>
+                            </h1>
+                            <div class="clear"></div>
+                            <div class="postBody">
+                                <div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown">
+                                    <h2 id="1-submit提交">1. submit提交</h2>
+                                    <h4 id="1-submit-按钮式提交">(1). submit 按钮式提交</h4>
+                                    <p>缺点：在提交前不可修改提交的form表单数据</p>
+                                    <pre><code>// 1. html
+                                    &lt;form method="post" action="/../.." &gt;
+                                        &lt;input type="text" name="username" value="" /&gt;
+                                        &lt;input type="password" name="pwd" value="" /&gt;
+                                        &lt;input type="submit" value="提交"/&gt;
+                                    &lt;/form&gt;
+                                    </code></pre>
+                                    <h4 id="2-onsubmit方式提交">(2). onsubmit方式提交</h4>
+                                    <p>优点：在请求提交操作(action)时，可对提交的数据进行处理</p>
+                                    <pre><code>// 1. html
+                                    &lt;form id='test_form' action='' method='' onsubmit='return checkForm()'&gt;
+                                        &lt;input type='text' name='username' value=''/&gt;
+                                        &lt;input type='password' id='input_pwd' value =''/&gt; // 注意此没有name属性，不会提交
+                                        &lt;input type='hidden' name='pwd' id='md5_pwd' value=''/&gt; // 此有name属性，会被form表单提交
+                                        &lt;button type='submit'&gt;提交&lt;button/&gt;
+                                    &lt;/form&gt;
+                                    // 2.js
+                                    function checkForm () { // 点击“提交”按钮，执行的方法
+                                        var input_pwd= document.getElementById('input_pwd');
+                                        var md5_pwd= document.getElementById('md5_pwd');
+                                         md5_pwd.value= toMD5(input_pwd.value);
+                                        //进行下一步
+                                        return true;
+                                    }
+                                    </code></pre>
+                                    <h2 id="2-formdata-提交">2. formData 提交</h2>
+                                    <pre><code>// 1. html
+                                    &lt;form id="photoForm"&gt;
+                                         &lt;input id="photoInput" type="file" title="图片上传" accept=".jpg,.jpeg,image/jpg,image/jpeg" name="myfiles" multiple="multiple"&gt;照片导入
+                                    &lt;/form&gt;
+
+                                    // 2. js
+                                    $('#photoForm input').change(function() {
+                                        var photoForm = $('#photoForm')[0],
+                                        photoFormData = new FormData(photoForm),
+                                        photoFileList = $('#photoInput')[0].files; // 上传的文件列表
+                                        $('.loading').show();
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: ZD.url+"/cert/filesUpload",
+                                            data: photoFormData,
+                                            // 告诉jQuery不要去处理发送的数据
+                                            processData : false,
+                                            // 告诉jQuery不要去设置Content-Type请求头
+                                            contentType : false,
+                                            complete:function(){
+                                               $('.loading').hide();
+                                               $("#photoForm input").val('');
+                                            },
+                                            success:function(d){
+                                                // 成功。。
+                                           }
+                                         });
+                                    });
+                                    </code></pre>
+                                    <h2 id="3-动态添加表单提交-js方式提交">3. 动态添加表单提交, js方式提交</h2>
+                                    <h4 id="1-动态追加的form表单">1. 动态追加的form表单</h4>
+                                    <pre><code>var exportForm = $('&lt;form action="'+ajaxUrl+'" method="post"&gt;\
+                                        &lt;input type="hidden" name="beginDate" value="'+$(".beginDate").val()+'"/&gt;\
+                                        &lt;/form&gt;');
+                                      $(document.body).append(exportForm);
+                                       exportForm.submit(); // 表单提交
+                                       exportForm.remove();
+                                    </code></pre>
+                                    <h4 id="2-静态form表单，js方式提交">2. 静态form表单，js方式提交</h4>
+                                    <pre><code>// 1. html
+                                    &lt;form action="'+ajaxUrl+'" method="post"&gt;
+                                        &lt;input type="hidden" name="beginDate" value="'+$(".beginDate").val()+'"/&gt;
+                                    &lt;/form&gt;
+
+                                    // 2. js/JQuery
+                                    document.getElementById("form").submit(); // js写法
+                                    $("#form").submit(); // jquery写法
+                                    </code></pre>
+                                </div>
+                                <div id="MySignature"></div>
+                                <div class="clear"></div>
+                                <div id="blog_post_info_block">
+                                    <div id="blog_post_info"></div>
+                                    <div class="clear"></div>
+                                    <div id="post_next_prev"></div>
+                                </div>
+                            </div>
+                    </div><!--end: topics 文章、评论容器-->
+                </div>
+            </div><!--end: forFlow -->
+        </div><!--end: mainContent 主体内容容器-->
+        <div class="clear"></div>
+    </div><!--end: main -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+
+</body>
+</html>
