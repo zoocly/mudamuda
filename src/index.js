@@ -1,7 +1,10 @@
 import wid from './component/widgit';
 import LB from './component/comp1';
 require('../index.css');
-require('../src/component/form2.less')
+require('../src/component/form2.less');
+import img1 from '../assets/yay1.jpg';
+import img2 from '../assets/yay2.jpg';
+import img3 from '../assets/yay3.jpg';
 $(function(){
 
   // 第一种方法
@@ -34,13 +37,11 @@ $(function(){
   })
 
   $('#lunbo').createLunBo({
-    imgs:[
-      '../html/assets/yay1.jpg',
-      '../html/assets/yay2.jpg',
-      '../html/assets/yay3.jpg',
-      '../html/assets/yay1.jpg',
-      '../html/assets/yay2.jpg',
-      '../html/assets/yay3.jpg'
+    //todo 为啥这里不能直接用require呢
+    imgs: [
+        img1,
+        img2,
+        img3
     ],
     time:2000
   })
