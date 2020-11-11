@@ -1,4 +1,5 @@
-require('./comp1.css');
+require ('./comp1.css');
+
 (function($, window, document,undefined){
   $.fn.createLunBo = function (props) {
     const {
@@ -19,9 +20,6 @@ require('./comp1.css');
         </div>
       </div>
     `);
-    if(!(imgs.length >=1 && Array.isArray(imgs))){
-      return
-    }
     [...imgs].map((it,index) =>{
       if(index === 0){
         $('#ol').append(`<li class="current">${index+1+''}</li>`);
@@ -139,4 +137,3 @@ require('./comp1.css');
     let timerID = setInterval(next, time);
   };
 })(jQuery, window, document);
-
