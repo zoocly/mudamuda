@@ -1,6 +1,8 @@
 const path = require('path');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry:'./src/index.js',
@@ -71,12 +73,21 @@ module.exports = {
           }
         ]
       },
-
+      {test: /\.vue$/, use: 'vue-loader'}
     ]
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: "index.html"
+    }),
     new MiniCssExtractPlugin({
       filename: "bundle.css"
     }),
-  ]
+    new VueLoaderPlugin(),
+  ],
+  resolve: {
+    alias: {
+      // 'vue$': 'vue/dist/vue.esm.js'
+    }
+  }
 }

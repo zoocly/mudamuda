@@ -7,6 +7,11 @@ require ('./comp1.css');
       time = 1000,
     } = props;
 
+    // 若html没有相应的id，return
+    if($(this).length < 1){
+      return
+    }
+
     // 渲染dom
     $(this).html(`
       <div id="box">
