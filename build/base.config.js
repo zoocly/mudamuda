@@ -3,6 +3,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     entry:'./src/index.js',
@@ -84,6 +85,11 @@ module.exports = {
             filename: "bundle.css"
         }),
         new VueLoaderPlugin(),
+        new webpack.ProvidePlugin({
+            $:"jquery",
+            jQuery:"jquery",
+            "windows.jQuery":"jquery"
+        })
     ],
     resolve: {
         alias: {
