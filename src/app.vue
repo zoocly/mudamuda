@@ -8,7 +8,7 @@
 export default {
   data() {
     return {
-      msg: 'Vue123'
+      msg: 'Vue122222ssss3'
     }
   }
 }
