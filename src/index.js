@@ -7,6 +7,30 @@ import img2 from '../assets/yay2.jpg';
 import img3 from '../assets/yay3.jpg';
 $(function(){
 
+  function renderLi(arr, dr){
+    let le = [];
+    arr.length >= 1 && arr.map(function (it){
+      le.push(`<li>${it}</li>`);
+    });
+    $(`#${dr} > ul`).html(le);
+  }
+  // 数据驱动UI 但是这样有点耗资源
+  let left = ['123','234'], right = ['456','567'];
+  renderLi(left,'left');
+  renderLi(right,'right');
+
+  $('#box').on('click','li',function (it){
+    const { target:{ textContent = ''} = {} } = it;
+    let isLeft = false;
+    if(left.includes(textContent)){
+      isLeft = true;
+    }
+    left = isLeft ? left.filter(it => it !== textContent) : [...left,textContent];
+    right = !isLeft ? right.filter(it => it !== textContent) : [...right,textContent];
+    renderLi(left,'left');
+    renderLi(right,'right');
+  })
+
   // 第一种方法
   $.extend({
     sayHello: function(name) {
